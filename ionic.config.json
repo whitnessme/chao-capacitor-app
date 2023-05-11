@@ -1,0 +1,7 @@
+{
+  "name": "chao-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
