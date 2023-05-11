@@ -11,6 +11,7 @@
 ```bash
 npm install
 npm run static
+npx cap sync
 ```
 
 ### 2. Create `capacitor.config.json` file based off `capacitor.config.json.example`:
