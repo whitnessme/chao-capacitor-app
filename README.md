@@ -48,3 +48,28 @@ npm run static
 # Sync all web code into the native platforms
 npx cap sync
 ```
+
+## Planning
+
+> The Chao Garden in Sonic Adventure 2 Battle was my favorite thing in elementary school and I'm very disappointed that the new Sonic games got rid of it. I want this app to keep track of your chaos! Data created using the [Chao Island Wiki](https://chao-island.com/)
+
+### Life Cycle
+
+Egg --> Child Chao --> Child Cocoon --> Adult Chao --> Adult Cocoon --> Egg again or Death
+
+### Alignment
+
+Hero Chao -- Neutral Chao -- Dark Chao
+
+### Evolution
+
+Normal -- Swim -- Fly -- Run -- Power
+
+### Colors
+
+1. Monotone or Two-tone
+2. White, blue, red, yellow, orange, sky-blue, pink, green, brown, purple, grey, lime-green, black
+
+### Personality
+
+Gentle, Naughty, Energetic, Quiet, Big eater, Chatty, Easily bored, Curious, Carefree, Careless, Smart, Cry baby, Lonely, Naive, No personality
