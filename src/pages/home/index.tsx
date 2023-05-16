@@ -1,7 +1,7 @@
 import { CapacitorSQLite, SQLiteConnection } from "@capacitor-community/sqlite"
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import chaoData from '../../seed-data';
+import * as chaoData from '../../seed-data.json';
 
 const mySQLite = new SQLiteConnection(CapacitorSQLite)
 
@@ -12,8 +12,11 @@ const Home: React.FC = () => {
 
     
     const loadJSON = async () => {
-        console.log("SEED DATA", JSON.stringify(chaoData))
-        return await mySQLite.importFromJson(JSON.stringify(chaoData))
+        let data = JSON.stringify(chaoData)
+        const isValid = await CapacitorSQLite.isJsonValid({ jsonstring: data });
+        console.log("ISVALID-----------", isValid.result)
+        // return await mySQLite.importFromJson(chaoData)
+        return
     }
 
     const initializeDB = async () => {
