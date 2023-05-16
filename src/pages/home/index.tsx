@@ -15,8 +15,7 @@ const Home: React.FC = () => {
         let data = JSON.stringify(chaoData)
         const isValid = await CapacitorSQLite.isJsonValid({ jsonstring: data });
         console.log("ISVALID-----------", isValid.result)
-        // return await mySQLite.importFromJson(chaoData)
-        return
+        return await mySQLite.importFromJson(data)
     }
 
     const initializeDB = async () => {
@@ -58,7 +57,7 @@ const Home: React.FC = () => {
 
 
     return (
-        <div className="mt-10">
+        <div className="flex-1">
             <h1>Home</h1>
             <Link href="/">Back</Link>
         </div>

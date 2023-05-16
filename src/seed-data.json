@@ -15,7 +15,6 @@
                 { "column": "evolution", "value": "TEXT NOT NULL" },
                 { "column": "life_cycle", "value": "TEXT NOT NULL" },
                 { "column": "personality", "value": "TEXT NOT NULL" },
-                { "column": "date_added", "value": "TEXT NOT NULL" },
                 {
                     "column": "last_modified",
                     "value": "INTEGER DEFAULT (strftime('%s', 'now'))"

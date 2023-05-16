@@ -15,3 +15,27 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+body {
+  width: 100%;
+}
+
+.min-safe-h-screen, body, html, #__next {
+  /* equivalent to 100dvh in major browsers */
+  min-height: -webkit-fill-available
+}
+
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top, 25px);
+}
+
+nav {
+  padding-top: calc(3.5em + env(safe-area-inset-top));
+}
+
+footer {
+  padding: 1em 1em calc(1em + env(safe-area-inset-bottom));
+}
