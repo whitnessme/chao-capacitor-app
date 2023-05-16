@@ -1,55 +1,59 @@
 import { CapacitorSQLite, SQLiteConnection } from "@capacitor-community/sqlite"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import chaoData from '../../seed-data';
 
+const mySQLite = new SQLiteConnection(CapacitorSQLite)
 
 const Home: React.FC = () => {
-    
-    const mySQLite = new SQLiteConnection(CapacitorSQLite)
+
+    const [db, setDb] = useState<any>(null);
+    const [chaos, setChaos] = useState<any>(null);
+
     
     const loadJSON = async () => {
+        console.log("SEED DATA", JSON.stringify(chaoData))
         return await mySQLite.importFromJson(JSON.stringify(chaoData))
     }
 
     const initializeDB = async () => {
-        let ret: any;
-        try {
-            ret = await CapacitorSQLite.checkConnectionsConsistency({
-                dbNames: ["testdb"],
-                openModes: ["RW"]
-            })
-        } catch {(e: any) => {
-                console.log("Catch", e);
-            }
+    const ret = await mySQLite.checkConnectionsConsistency();
+    const isConn = (await mySQLite.isConnection("chaodb", false)).result;
+    
+    let database: any;
+    console.log("ret ---- ", ret, "isConn ----- ", isConn)
+    if (ret.result && isConn) {
+        database = await mySQLite.retrieveConnection("chaodb", false)
+    } else if (ret && !ret.result && !isConn) {
+        database = await mySQLite.createConnection(
+            "chaodb",
+            false,
+            "no-encryption",
+            1,
+            false
+            );
         }
-
-        let db: any;
-        console.log("HELLO", ret)
-        if (ret.result) {
-            db = await mySQLite.retrieveConnection("testdb", false)
-        } else {
-            console.log("hello")
-            db = await mySQLite.createConnection(
-                "testdb",
-                false,
-                "no-encryption",
-                1,
-                false
-                );
-        }
-
-        return db
+        setDb(database);
+        return database;
     }
 
     useEffect(() => {
         initializeDB().then((db:any) => {
-            // window.alert("initialized " + JSON.stringify(db, null, 2))
+            console.log("useEffect initialized " + JSON.stringify(db, null, 2))
             return loadJSON();
         }).then((res: any) => {
-            window.alert(JSON.stringify(res, null, 2));
+            console.log("after loading...", JSON.stringify(res, null, 2));
+            db.open()
+            return db.query("SELECT * FROM chaos")
+        }).then ((data:any) => {
+            console.log("DATA", data)
+            setChaos(data.values)
+        }).catch((res:any) => {
+
         })
     }, [])
+
+
     return (
         <div className="mt-10">
             <h1>Home</h1>
